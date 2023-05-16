@@ -4,6 +4,10 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Build competed'
+        retry(count: 3) {
+          echo 'Trying to Build'
+        }
+
       }
     }
 
@@ -24,8 +28,9 @@ pipeline {
       }
     }
 
-    stage('Depoy') {
+    stage('Deploy') {
       steps {
+        input(message: 'Are you Sure to Deploy', ok: 'Yes , i\'m Sure')
         echo 'Deployment Done'
       }
     }
